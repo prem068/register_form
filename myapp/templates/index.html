@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Database</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+    {% if delete %}
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white shadow-lg rounded-lg p-8">
+            <h1 class="text-2xl font-bold text-red-600 mb-4">Do you want to delete {{ student.name }}?</h1>
+            <form method="post" class="flex space-x-4">
+                {% csrf_token %}
+                <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Delete</button>
+                <a href="/" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancel</a>
+            </form>
+        </div>
+    </div>
+    {% else %}
+
+    <div class="container mx-auto py-10">
+        <h1 class="text-3xl font-bold text-center text-white bg-blue-500 py-4 rounded">Employee Database</h1>
+        <div class="mt-8">
+            <table class="table-auto w-full border-collapse border border-gray-300 shadow-lg">
+                <thead>
+                    <tr class="bg-blue-500 text-white">
+                        <th class="border border-gray-300 px-4 py-2">Name</th>
+                        <th class="border border-gray-300 px-4 py-2">Email</th>
+                        <th class="border border-gray-300 px-4 py-2">DOB</th>
+                        <th class="border border-gray-300 px-4 py-2">Address</th>
+                        <th class="border border-gray-300 px-4 py-2">Phone Number</th>
+                        <th class="border border-gray-300 px-4 py-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in emp %}
+                    <tr class="bg-white hover:bg-gray-100">
+                        <td class="border border-gray-300 px-4 py-2">{{ i.name }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ i.email }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ i.dob }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ i.addr }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ i.phno }}</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <a href="/update/{{ i.id }}" class="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600">Update</a>
+                            <a href="/delete/{{ i.id }}" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-6 text-center">
+            <a href="/insert/" class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600">Insert New Record</a>
+        </div>
+    </div>
+
+    {% endif %}
+</body>
+</html>
