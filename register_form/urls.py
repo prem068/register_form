@@ -23,5 +23,11 @@ urlpatterns = [
     path('',display),
     path('insert/',insert_view),
     path('update/<str:id>',update_view),
-    path('delete/<str:id>',delete_view)
+    path('delete/<str:id>',delete_view),
+    #api--calls
+    path('api/employees/', api_display, name='api_display'),
+    path('api/employees/insert/', api_insert, name='api_insert'),
+    path('api/employees/delete/<int:id>/', api_delete, name='api_delete'),
+    path('api/employees/update/<int:id>/', api_update, name='api_update')
 ]
+
