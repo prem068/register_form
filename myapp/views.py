@@ -77,3 +77,4 @@ def api_update(request, id):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     except Employee.DoesNotExist:
         return Response({'error': 'Employee not found'}, status=status.HTTP_404_NOT_FOUND)
+    
